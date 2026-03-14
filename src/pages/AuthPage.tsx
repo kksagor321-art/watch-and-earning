@@ -24,9 +24,28 @@ const AuthPage = () => {
     if (!isLogin && !name) { setError("Please enter your name"); return; }
 
     const success = isLogin ? login(email, password) : signup(name, email, password);
-    if (success) navigate("/dashboard");
-    else setError("Something went wrong");
+    if (success) {
+      if (!isLogin) {
+        localStorage.setItem("adearnings_onboarding", "pending");
+        setShowOnboarding(true);
+      } else {
+        navigate("/dashboard");
+      }
+    } else {
+      setError("Something went wrong");
+    }
   };
+
+  if (showOnboarding) {
+    return (
+      <OnboardingTutorial
+        onComplete={() => {
+          localStorage.removeItem("adearnings_onboarding");
+          navigate("/dashboard");
+        }}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col justify-center px-6 bg-background">
