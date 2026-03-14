@@ -68,15 +68,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const addCoins = (amount: number) => {
-    if (!user) return;
-    const updated = { ...user, coins: user.coins + amount, totalEarnings: user.totalEarnings + amount };
-    persist(updated);
+    setUser(prev => {
+      if (!prev) return prev;
+      const updated = { ...prev, coins: prev.coins + amount, totalEarnings: prev.totalEarnings + amount };
+      localStorage.setItem("adearnings_user", JSON.stringify(updated));
+      return updated;
+    });
   };
 
   const completeTask = (taskId: string) => {
-    if (!user || user.completedTasks.includes(taskId)) return;
-    const updated = { ...user, completedTasks: [...user.completedTasks, taskId] };
-    persist(updated);
+    setUser(prev => {
+      if (!prev || prev.completedTasks.includes(taskId)) return prev;
+      const updated = { ...prev, completedTasks: [...prev.completedTasks, taskId] };
+      localStorage.setItem("adearnings_user", JSON.stringify(updated));
+      return updated;
+    });
   };
 
   return (
