@@ -1,5 +1,5 @@
 import { NavLink as RouterNavLink } from "react-router-dom";
-import { Home, ListChecks, Wallet, BookOpen, User } from "lucide-react";
+import { Home, ListChecks, Wallet, BookOpen, User, ShieldCheck } from "lucide-react";
 
 const tabs = [
   { to: "/dashboard", icon: Home, label: "Home" },
@@ -7,6 +7,7 @@ const tabs = [
   { to: "/wallet", icon: Wallet, label: "Wallet" },
   { to: "/guide", icon: BookOpen, label: "Guide" },
   { to: "/profile", icon: User, label: "Profile" },
+  { to: "/admin", icon: ShieldCheck, label: "Admin" },
 ];
 
 const BottomNav = () => (
