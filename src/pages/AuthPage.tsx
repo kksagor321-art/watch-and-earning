@@ -13,6 +13,7 @@ const AuthPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const { login, signup } = useAuth();
   const navigate = useNavigate();
 
