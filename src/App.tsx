@@ -22,7 +22,8 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
 const PublicRoute = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuth();
-  if (user) return <Navigate to="/dashboard" replace />;
+  const hasOnboarding = localStorage.getItem("adearnings_onboarding") === "pending";
+  if (user && !hasOnboarding) return <Navigate to="/dashboard" replace />;
   return <>{children}</>;
 };
 
